@@ -6,7 +6,9 @@ namespace PingPong
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SocketListener sl = new SocketListener(5500);
+            sl.Connect();
+            sl.AcceptClients(new ClientSocketHandler(new EchoStringDataWriter())).GetAwaiter().GetResult();
         }
     }
 }

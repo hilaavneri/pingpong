@@ -3,22 +3,49 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PingPong
 {
-    class SocketListener : IListener<string>
+    public class SocketListener : IListener<string>
     {
         private readonly int _port;
+        private  Socket _socket;
+
+        public SocketListener(int port)
+        {
+            _port = port;
+        }
+
+        public async Task AcceptClients(ClientHandlerBase clientHandler)
+        {
+            Console.WriteLine("here");
+            while (true)
+            {
+                try
+                {
+                    Socket ClientSocket =  _socket.Accept();
+                    Console.WriteLine("now here");
+
+                    await clientHandler.HandleClient(ClientSocket);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                    
+            }
+        }
 
         public void Connect()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, _port);
-            Socket listener = new Socket(ipAddress.AddressFamily,
+            _socket = new Socket(ipAddress.AddressFamily,
     SocketType.Stream, ProtocolType.Tcp);
-            listener.Bind(localEndPoint);
-            listener.Listen(100);
+            _socket.Bind(localEndPoint);
+            _socket.Listen(100);
         }
        
     }

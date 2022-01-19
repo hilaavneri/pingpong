@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PingPong
 {
-    abstract class ClientHandlerBase
+    public abstract class ClientHandlerBase
     {
-        private readonly Socket _clientSocket;
-
-        protected ClientHandlerBase(Socket clientSocket)
-        {
-            _clientSocket = clientSocket;
-        }
-
-        public abstract void HandleClient();
+        protected Socket ClientSocket;
+        protected abstract void CloseConnection();
+        public abstract Task HandleClient(Socket clientSocket);
     }
 }
