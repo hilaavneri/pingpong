@@ -8,5 +8,6 @@ namespace PingPong
     {
         (int, byte[]) ReadData();
         void WriteData(byte[] data);
+        void CloseConnection();
     }
 }

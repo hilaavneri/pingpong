@@ -14,6 +14,12 @@ namespace PingPong.SendReieve
             _socket = socket;
         }
 
+        public void CloseConnection()
+        {
+            _socket.Shutdown(SocketShutdown.Both);
+            _socket.Close();
+        }
+
         public (int, byte[]) ReadData()
         {
             byte[] bytes = new byte[1024];
