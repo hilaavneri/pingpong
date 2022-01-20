@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PingPong.SendReieve;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PingPong
 {
-    public class SocketListener : IListener<string>
+    public class SocketListener : IListener
     {
         private readonly int _port;
         private  Socket _socket;
@@ -25,7 +26,7 @@ namespace PingPong
                 try
                 {
                     Socket ClientSocket = _socket.Accept();
-                    Task.Run(()=>clientHandler.HandleClient(ClientSocket));
+                    Task.Run(()=>clientHandler.HandleClient(new SocketSendRecv(ClientSocket)));
                 }
                 catch (Exception e)
                 {

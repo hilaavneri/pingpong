@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PingPong
 {
-    public interface IListener<T>
+    public interface IListener
     {
         void Connect();
         void AcceptClients(ClientHandlerBase clientHandler);

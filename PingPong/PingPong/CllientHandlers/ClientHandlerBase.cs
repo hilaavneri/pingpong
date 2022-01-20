@@ -10,6 +10,6 @@ namespace PingPong
     {
         protected Socket ClientSocket;
         protected abstract void CloseConnection();
-        public abstract void HandleClient(Socket clientSocket);
+        public abstract void HandleClient(ISendRecv sendRecv);
     }
 }

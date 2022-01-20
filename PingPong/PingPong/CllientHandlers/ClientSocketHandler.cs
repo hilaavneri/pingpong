@@ -10,6 +10,7 @@ namespace PingPong
     {
 
         private IDataWriter _writer;
+        
 
         public ClientSocketHandler(IDataWriter writer)
         {
@@ -23,31 +24,36 @@ namespace PingPong
         }
 
 
-        public  override void HandleClient(Socket clientSocket)
+        public  override void HandleClient(ISendRecv sender)
         {
             Console.WriteLine("start");
                 try
                 {
-                    ClientSocket = clientSocket;
+                    //ClientSocket = clientSocket;
                     string data = "";
-                byte[] bytes = null;
+                //byte[] bytes = null;
                 while (true)
                 {
-                    bytes = new byte[1024];
-                    int bytesRec =  ClientSocket.Receive(bytes);
-                    string msg = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                    Console.WriteLine(msg);
-                    clientSocket.Send(_writer.GetData(bytesRec, bytes));
+                    //bytes = new byte[1024];
+                    int bytesRec;
+                    byte[] bytes;
+                    //=  ClientSocket.Receive(bytes);
+                    string msg;
+                    //= Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    (bytesRec, bytes) = sender.ReadData();
+                    //Console.WriteLine(msg);
+                    sender.WriteData(_writer.GetData(bytesRec, bytes));
+                    //clientSocket.Send(_writer.GetData(bytesRec, bytes));
                         if (data.Equals("exit"))
                         {
                             break;
                         }
                     }
-                    CloseConnection();
+                    //CloseConnection();
                 }
                 catch (Exception e)
                 {
-                    CloseConnection();
+                    //CloseConnection();
                     Console.WriteLine(e.Message);
                 }
            

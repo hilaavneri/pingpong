@@ -31,7 +31,7 @@ namespace PingPongClient
                 IPAddress ip = IPAddress.Parse(serverIp);
                 Console.WriteLine(ipAddress.MapToIPv4().ToString());
                 Console.WriteLine(ip.ToString());
-                IPEndPoint remoteEP = new IPEndPoint(ip, 5500);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 5500);
 
                 _socket = new Socket(ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
