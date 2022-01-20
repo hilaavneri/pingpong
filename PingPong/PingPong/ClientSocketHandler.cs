@@ -22,10 +22,10 @@ namespace PingPong
             ClientSocket.Close();
         }
 
-        public override async Task HandleClient(Socket clientSocket)
+
+        public  override void HandleClient(Socket clientSocket)
         {
             Console.WriteLine("start");
-            await Task.Yield();
                 try
                 {
                     ClientSocket = clientSocket;
@@ -33,9 +33,11 @@ namespace PingPong
                 byte[] bytes = null;
                 while (true)
                 {
-                        bytes = new byte[1024];                    
-                        int bytesRec =  ClientSocket.Receive(bytes);
-                        clientSocket.Send(_writer.GetData(bytesRec));
+                    bytes = new byte[1024];
+                    int bytesRec =  ClientSocket.Receive(bytes);
+                    string msg = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    Console.WriteLine(msg);
+                    clientSocket.Send(_writer.GetData(bytesRec, bytes));
                         if (data.Equals("exit"))
                         {
                             break;

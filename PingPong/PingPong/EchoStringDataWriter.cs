@@ -6,12 +6,11 @@ namespace PingPong
 {
     class EchoStringDataWriter : IDataWriter
     {
-        public byte[] GetData(int data)
+        public byte[] GetData(int data, byte[] bytes)
         {
-            byte[] bytes = new byte[1024];
+            //var bytes = new byte[1024];
             string msg = Encoding.ASCII.GetString(bytes, 0, data);
             return Encoding.ASCII.GetBytes(msg);
-
         }
     }
 }

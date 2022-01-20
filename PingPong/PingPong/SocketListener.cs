@@ -17,17 +17,15 @@ namespace PingPong
             _port = port;
         }
 
-        public async Task AcceptClients(ClientHandlerBase clientHandler)
+        public void AcceptClients(ClientHandlerBase clientHandler)
         {
             Console.WriteLine("here");
             while (true)
             {
                 try
                 {
-                    Socket ClientSocket =  _socket.Accept();
-                    Console.WriteLine("now here");
-
-                    await clientHandler.HandleClient(ClientSocket);
+                    Socket ClientSocket = _socket.Accept();
+                    Task.Run(()=>clientHandler.HandleClient(ClientSocket));
                 }
                 catch (Exception e)
                 {

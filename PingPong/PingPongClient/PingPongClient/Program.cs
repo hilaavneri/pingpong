@@ -11,7 +11,7 @@ namespace PingPongClient
         {
             try
             {
-                var socketClient = new SocketClient("127.0.0.1", 5500, new SimpleConsoleDataReader());
+                var socketClient = new SocketClient("223.225.13.37", 5500, new SimpleConsoleDataReader());
                 socketClient.ConnectToServer();
                 socketClient.Run();
                 socketClient.CloseConnection();

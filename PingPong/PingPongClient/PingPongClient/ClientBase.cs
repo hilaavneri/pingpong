@@ -6,8 +6,8 @@ namespace PingPongClient
 {
     public abstract class ClientBase
     {
-        private string serverIp;
-        private int serverPort;
+        protected string serverIp;
+        protected int serverPort;
 
         protected ClientBase(string serverIp, int serverPort)
         {

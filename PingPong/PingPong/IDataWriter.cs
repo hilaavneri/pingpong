@@ -6,6 +6,6 @@ namespace PingPong
 {
     public interface IDataWriter
     {
-        byte[] GetData(int data);
+        byte[] GetData(int data, byte[] bytes);
     }
 }

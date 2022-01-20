@@ -8,7 +8,6 @@ namespace PingPong
     public interface IListener<T>
     {
         void Connect();
-
-        Task AcceptClients(ClientHandlerBase clientHandler);
+        void AcceptClients(ClientHandlerBase clientHandler);
     }
 }
