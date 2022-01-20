@@ -52,8 +52,6 @@ namespace PingPong
                 sender.CloseConnection();
             }
 
-           
-            
         }
     }
     
