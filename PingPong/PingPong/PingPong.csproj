@@ -5,4 +5,16 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="bin\Debug\obj\**" />
+    <Compile Remove="bin\obj\**" />
+    <Compile Remove="SendReieve\obj\**" />
+    <EmbeddedResource Remove="bin\Debug\obj\**" />
+    <EmbeddedResource Remove="bin\obj\**" />
+    <EmbeddedResource Remove="SendReieve\obj\**" />
+    <None Remove="bin\Debug\obj\**" />
+    <None Remove="bin\obj\**" />
+    <None Remove="SendReieve\obj\**" />
+  </ItemGroup>
+
 </Project>
