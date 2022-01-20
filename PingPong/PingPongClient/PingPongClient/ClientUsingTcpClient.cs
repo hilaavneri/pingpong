@@ -10,10 +10,13 @@ namespace PingPongClient
         private TcpClient _client;
         private NetworkStream _stream;
         private IDataReader _dataReader;
+        private IDataWriter _dataWriter;
 
-        public ClientUsingTcpClient(string serverIp, int serverPort, IDataReader dataReader) : base(serverIp, serverPort)
+
+        public ClientUsingTcpClient(string serverIp, int serverPort, IDataReader dataReader, IDataWriter dataWriter) : base(serverIp, serverPort)
         {
             _dataReader = dataReader;
+            _dataWriter = dataWriter;
         }
 
         public override void CloseConnection()
@@ -49,7 +52,8 @@ namespace PingPongClient
                     byte[] data = _dataReader.ReadData();
                     _stream.Write(data, 0, data.Length);
                     int bytesRec = _stream.Read(bytes);
-                    Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                    _dataWriter.Write(bytes, bytesRec);
+                    //Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRec));
 
                 }
             }

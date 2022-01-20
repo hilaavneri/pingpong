@@ -15,7 +15,7 @@ namespace PingPongClient
                 //socketClient.ConnectToServer();
                 //socketClient.Run();
                 //socketClient.CloseConnection();
-                var tcpClient = new ClientUsingTcpClient("127.0.0.1", 5500, new SimpleConsoleDataReader());
+                var tcpClient = new ClientUsingTcpClient("127.0.0.1", 5500, new ConsolePersonDataReader(), new ObjectDataWriter());
                 tcpClient.ConnectToServer();
                 tcpClient.Run();
                 tcpClient.CloseConnection();

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PingPongClient
 {
-    class IDataWriter
+    public interface IDataWriter
     {
+        void Write(byte[] bytes, int bytesRec);
     }
 }

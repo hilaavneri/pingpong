@@ -10,9 +10,11 @@ namespace PingPongClient
     {
         private Socket _socket;
         private IDataReader _dataReader;
-        public SocketClient(string serverIp, int serverPort, IDataReader dataReader) : base(serverIp, serverPort)
+        private IDataWriter _dataWriter;
+        public SocketClient(string serverIp, int serverPort, IDataReader dataReader, IDataWriter dataWriter) : base(serverIp, serverPort)
         {
             _dataReader = dataReader;
+            _dataWriter = dataWriter;
 
         }
 
@@ -55,7 +57,8 @@ namespace PingPongClient
                 {
                     int bytesSent = _socket.Send(_dataReader.ReadData());
                     int bytesRec = _socket.Receive(bytes);
-                    Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                    //Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                    _dataWriter.Write(bytes, bytesRec);
 
                 }
             }
